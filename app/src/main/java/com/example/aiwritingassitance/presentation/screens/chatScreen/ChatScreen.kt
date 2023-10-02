@@ -70,7 +70,7 @@ fun ChatScreen(
                 title = "Email Writer",
                 icon = R.drawable.email,
                 bgkColor = Color(0xFF1165E4),
-                onClick = {
+                onClick = { n
                     navController.navigate(Screens.EmailScreen.name)
                 }
             )
