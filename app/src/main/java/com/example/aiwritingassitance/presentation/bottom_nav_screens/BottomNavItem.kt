@@ -1,4 +1,4 @@
-package com.example.aiwritingassitance.screens
+package com.example.aiwritingassitance.presentation.bottom_nav_screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
