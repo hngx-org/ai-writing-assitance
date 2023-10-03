@@ -9,6 +9,8 @@ import com.example.aiwritingassitance.presentation.screens.chatScreen.ChatScreen
 import com.example.aiwritingassitance.presentation.screens.emailScreen.EmailScreen
 import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayScreen
 import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckScreen
+import com.example.aiwritingassitance.presentation.screens.plansScreen.CheckoutScreen
+import com.example.aiwritingassitance.presentation.screens.plansScreen.PlansScreen
 
 
 @Composable
@@ -39,6 +41,13 @@ fun ChatNavigation(
         }
         composable(route = Screens.GrammarCheckScreen.name) {
             GrammarCheckScreen(navController = navController)
+        }
+
+        composable(route = Screens.PlansScreen.name) {
+            PlansScreen(navController = navController)
+        }
+        composable(route = Screens.CheckoutScreen.name) {
+            CheckoutScreen(navController = navController)
         }
     }
 }
