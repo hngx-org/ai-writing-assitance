@@ -51,6 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.aiwritingassitance.presentation.navigation.Screens
 import com.example.aiwritingassitance.ui.theme.CardColor
 import com.example.aiwritingassitance.ui.theme.DaisyBC
 import com.example.aiwritingassitance.ui.theme.Green2
@@ -115,7 +116,7 @@ fun HomeScreen(
                     .padding(it)
                     //.verticalScroll(rememberScrollState())
             ) {
-                UpgradeAccount()
+                UpgradeAccount(navController = navController)
                 ActionButton(
                     onAIChatBuddyButtonClicked = { /*TODO*/ },
                     onNewChatButtonClicked = { /*TODO*/ },
@@ -142,7 +143,8 @@ fun HomeScreen(
 
 @Composable
 private fun UpgradeAccount(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -171,7 +173,9 @@ private fun UpgradeAccount(
             text = "Enjoy the full power without limit!")
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                      navController.navigate(Screens.CheckoutScreen.name)
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Green2
             ),
