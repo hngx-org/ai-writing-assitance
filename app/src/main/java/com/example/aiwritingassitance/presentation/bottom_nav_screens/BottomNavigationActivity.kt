@@ -17,6 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.AccountDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.AccountScreen
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.ChatDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.HomeDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.HomeScreen
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.allDestinations
 import com.example.aiwritingassitance.presentation.navigation.Screens
 import com.example.aiwritingassitance.presentation.screens.articlesScreen.ArticlesScreen
 import com.example.aiwritingassitance.presentation.bottom_nav_screens.chatScreen.ChatScreen
@@ -25,12 +31,6 @@ import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayScr
 import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckScreen
 import com.example.aiwritingassitance.presentation.screens.plansScreen.CheckoutScreen
 import com.example.aiwritingassitance.presentation.screens.plansScreen.PlansScreen
-import com.example.aiwritingassitance.screens.AccountDestination
-import com.example.aiwritingassitance.screens.AccountScreen
-import com.example.aiwritingassitance.screens.ChatDestination
-import com.example.aiwritingassitance.screens.HomeDestination
-import com.example.aiwritingassitance.screens.HomeScreen
-import com.example.aiwritingassitance.screens.allDestinations
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 
 
