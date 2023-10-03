@@ -1,4 +1,4 @@
-package com.example.aiwritingassitance.presentation.screens.chatScreen
+package com.example.aiwritingassitance.presentation.bottom_nav_screens.chatScreen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

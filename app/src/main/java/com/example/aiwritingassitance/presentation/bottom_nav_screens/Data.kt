@@ -1,4 +1,4 @@
-package com.example.aiwritingassitance.screens
+package com.example.aiwritingassitance.presentation.bottom_nav_screens
 
 object Data {
     var prompts = listOf<String>(
