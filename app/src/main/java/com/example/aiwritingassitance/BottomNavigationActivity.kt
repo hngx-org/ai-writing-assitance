@@ -1,4 +1,4 @@
-package com.example.aiwritingassitance.presentation.bottom_nav_screens
+package com.example.aiwritingassitance
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,6 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.AccountDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.AccountScreen
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.ChatDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.HomeDestination
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.HomeScreen
+import com.example.aiwritingassitance.presentation.bottom_nav_screens.allDestinations
 import com.example.aiwritingassitance.presentation.navigation.Screens
 import com.example.aiwritingassitance.presentation.screens.articlesScreen.ArticlesScreen
 import com.example.aiwritingassitance.presentation.bottom_nav_screens.chatScreen.ChatScreen
