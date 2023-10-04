@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.example.aiwritingassitance"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.aiwritingassitance"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -73,5 +73,7 @@ dependencies {
     //navigation
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
+
+    implementation ("com.github.hngx-org:mirage-kotlin-auth-library:2.0.0")
 
 }
