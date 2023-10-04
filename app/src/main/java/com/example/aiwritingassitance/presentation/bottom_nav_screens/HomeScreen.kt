@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.aiwritingassitance.presentation.navigation.Screens
 import com.example.aiwritingassitance.ui.theme.CardColor
 import com.example.aiwritingassitance.ui.theme.DaisyBC
 import com.example.aiwritingassitance.ui.theme.Green2
@@ -103,19 +104,21 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .padding(it)
-                    //.verticalScroll(rememberScrollState())
+                //.verticalScroll(rememberScrollState())
             ) {
-                UpgradeAccount()
+                UpgradeAccount(navController)
                 ActionButton(
                     onAIChatBuddyButtonClicked = { /*TODO*/ },
                     onNewChatButtonClicked = { /*TODO*/ },
-                    onChatHistoryButtonClicked ={  } )
+                    onChatHistoryButtonClicked = { })
 
                 Spacer(modifier = Modifier.height(15.dp))
 
-                Text(text = "Prompt Examples",
+                Text(
+                    text = "Prompt Examples",
                     modifier.padding(start = 16.dp),
-                    fontWeight = FontWeight.Bold)
+                    fontWeight = FontWeight.Bold
+                )
                 Spacer(modifier = Modifier.height(5.dp))
 
                 LazyVerticalGrid(columns = GridCells.Fixed(count = 2),
@@ -132,6 +135,7 @@ fun HomeScreen(
 
 @Composable
 private fun UpgradeAccount(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -158,10 +162,14 @@ private fun UpgradeAccount(
         }
 
         Text(
-            text = "Enjoy the full power without limit!")
+            text = "Enjoy the full power without limit!"
+        )
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(Screens.CheckoutScreen.name)
+//                navController.navigate(Screens.PlansScreen.name)
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Green2
             ),
@@ -192,7 +200,7 @@ private fun ActionButton(
             .padding(all = 16.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            //.background(Grey)
+        //.background(Grey)
     ) {
 
         Button(
@@ -205,11 +213,14 @@ private fun ActionButton(
                 .fillMaxWidth()
                 .padding()
         ) {
-            Text(text = "AI Writing Assitance",
-                color = Neutral1)
+            Text(
+                text = "AI Writing Assitance",
+                color = Neutral1
+            )
             Spacer(modifier = Modifier.weight(1.0f))
-            Icon(imageVector = Icons.Outlined.ArrowForward
-                , contentDescription = "Proceed")
+            Icon(
+                imageVector = Icons.Outlined.ArrowForward, contentDescription = "Proceed"
+            )
 
         }
 
@@ -224,15 +235,19 @@ private fun ActionButton(
                 .fillMaxWidth()
                 .padding()
         ) {
-            Icon(imageVector = Icons.Filled.Add,
+            Icon(
+                imageVector = Icons.Filled.Add,
                 contentDescription = "proceed",
                 tint = Neutral2
             )
             Spacer(modifier = Modifier.width(5.dp))
-            Text(text = "New Chat",
-                color = Neutral2)
+            Text(
+                text = "New Chat",
+                color = Neutral2
+            )
             Spacer(modifier = Modifier.weight(1.0f))
-            Icon(imageVector = Icons.Filled.ArrowForward,
+            Icon(
+                imageVector = Icons.Filled.ArrowForward,
                 contentDescription = "proceed",
                 tint = Neutral2
             )
@@ -250,15 +265,19 @@ private fun ActionButton(
                 .fillMaxWidth()
                 .padding()
         ) {
-            Icon(imageVector = Icons.Outlined.List,
+            Icon(
+                imageVector = Icons.Outlined.List,
                 contentDescription = "proceed",
                 tint = Neutral2
             )
             Spacer(modifier = Modifier.width(5.dp))
-            Text(text = "Chat History",
-                color = Neutral2)
+            Text(
+                text = "Chat History",
+                color = Neutral2
+            )
             Spacer(modifier = Modifier.weight(1.0f))
-            Icon(imageVector = Icons.Filled.ArrowForward,
+            Icon(
+                imageVector = Icons.Filled.ArrowForward,
                 contentDescription = "proceed",
                 tint = Neutral2
             )
@@ -267,7 +286,7 @@ private fun ActionButton(
 }
 
 @Composable
-fun PromptCards(modifier: Modifier, promptMessage : String) {
+fun PromptCards(modifier: Modifier, promptMessage: String) {
     Card(
         modifier
             .aspectRatio(1.7f)
@@ -277,10 +296,12 @@ fun PromptCards(modifier: Modifier, promptMessage : String) {
         colors = CardDefaults.cardColors(
             containerColor = CardColor
         )
-        ){
-        Text(text = promptMessage,
+    ) {
+        Text(
+            text = promptMessage,
             Modifier.padding(5.dp),
-            color = Neutral2)
+            color = Neutral2
+        )
     }
 }
 
