@@ -29,6 +29,8 @@ import com.example.aiwritingassitance.presentation.bottom_nav_screens.chatScreen
 import com.example.aiwritingassitance.presentation.screens.emailScreen.EmailScreen
 import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayScreen
 import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckScreen
+import com.example.aiwritingassitance.presentation.screens.plansScreen.CheckoutScreen
+import com.example.aiwritingassitance.presentation.screens.plansScreen.PlansScreen
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 
 
@@ -105,6 +107,14 @@ class BottomNavigationActivity : ComponentActivity() {
                         }
                         composable(route = Screens.GrammarCheckScreen.name) {
                             GrammarCheckScreen(navController = navController)
+                        }
+
+
+                        composable(route = Screens.PlansScreen.name) {
+                            PlansScreen(navController = navController)
+                        }
+                        composable(route = Screens.CheckoutScreen.name) {
+                            CheckoutScreen(navController = navController)
                         }
                     }
 

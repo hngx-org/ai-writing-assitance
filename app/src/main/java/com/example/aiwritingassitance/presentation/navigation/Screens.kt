@@ -6,5 +6,7 @@ enum class Screens {
     ArticlesScreen,
     EmailScreen,
     EssaysScreen,
-    GrammarCheckScreen
+    GrammarCheckScreen,
+    PlansScreen,
+    CheckoutScreen,
 }

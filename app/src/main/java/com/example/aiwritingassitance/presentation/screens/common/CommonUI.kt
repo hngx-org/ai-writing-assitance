@@ -511,6 +511,7 @@ fun EditTextField(
     maxLines: Int = 1,
 ) {
     OutlinedTextField(
+        modifier = modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
         maxLines = maxLines,
