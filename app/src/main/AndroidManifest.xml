@@ -13,6 +13,28 @@
         android:theme="@style/Theme.AIWritingAssitance"
         tools:targetApi="31">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="true"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.AIWritingAssitance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.AIWritingAssitance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".BottomNavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_bottom_navigation"
@@ -31,7 +53,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER"--> />
+                <!-- <category android:name="android.intent.category.LAUNCHER" -->
+                />
             </intent-filter>
         </activity>
     </application>
