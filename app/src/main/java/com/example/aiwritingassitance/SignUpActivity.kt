@@ -45,9 +45,12 @@ import com.example.aiwritingassitance.ui.theme.Neutral1
 import com.example.aiwritingassitance.ui.theme.Neutral2
 
 class SignUpActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+
             AIWritingAssitanceTheme {
 
                 val intent = intent
