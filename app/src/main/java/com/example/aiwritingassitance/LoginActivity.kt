@@ -45,18 +45,20 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val intent = intent
-            val isToken = intent.getBooleanExtra("EntryMessage", true)
+            val email = intent.getStringExtra("UserEmail")
+            val password = intent.getStringExtra("UserPassword")
 
             AIWritingAssitanceTheme {
+                val authService = AuthService(applicationContext)
 
                 //val viewModel: LoginViewModel = hiltViewModel()
 
                 var loginEmail by remember {
-                    mutableStateOf("")
+                    mutableStateOf(email)
                 }
 
                 var loginPassword by remember {
-                    mutableStateOf("")
+                    mutableStateOf(password)
                 }
 
                 val isDataValidated by remember {
@@ -85,9 +87,13 @@ class LoginActivity : ComponentActivity() {
 
                     )
 
-                    LoginFields(email = loginEmail, password = loginPassword,
-                        onEmailChange = { loginEmail = it },
-                        onPasswordChange = { loginPassword = it })
+                    loginEmail?.let {
+                        loginPassword?.let { it1 ->
+                            LoginFields(email = it, password = it1,
+                                onEmailChange = { loginEmail = it },
+                                onPasswordChange = { loginPassword = it })
+                        }
+                    }
 
 
                     Button(
