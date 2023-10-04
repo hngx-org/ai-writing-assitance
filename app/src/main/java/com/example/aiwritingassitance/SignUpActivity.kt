@@ -126,6 +126,22 @@ class SignUpActivity : ComponentActivity() {
                     ) {
                         Text(text = "Continue", color = Neutral1)
                     }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Button(
+                        onClick = {
+                            Intent(this@SignUpActivity, LoginActivity::class.java).also {
+                                it.putExtra("EntryMessage", isToken)
+                                startActivity(it)
+                            }
+                        },
+                        shape = RoundedCornerShape(5.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    ) {
+                        Text(text = "Already have an account", color = Neutral1)
+                    }
                 }
             }
         }
