@@ -114,15 +114,15 @@ class SignUpActivity : ComponentActivity() {
                             confirmPassword = it
                         }
                     )
+                    if (isLoading) {
+                        CircularProgressIndicator()
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
                     Button(
                         onClick = {
 
                             isLoading = true
-/*                            if (isLoading) {
-                                CircularProgressIndicator()
-                            }*/
                             CoroutineScope(Dispatchers.IO).launch {
                                 val signUpResult = authService.signUp(name = name, email = email, password = password)
                                 Log.d("ApiResponseResult", "$name $email $password")
@@ -133,6 +133,8 @@ class SignUpActivity : ComponentActivity() {
                                         it.putExtra("UserPassword", password)
                                         startActivity(it)
                                     }
+                                } else {
+                                    isLoading = false
                                 }
 
 
@@ -164,6 +166,7 @@ class SignUpActivity : ComponentActivity() {
                     ) {
                         Text(text = "Already have an account", color = Neutral1)
                     }
+
                 }
             }
         }

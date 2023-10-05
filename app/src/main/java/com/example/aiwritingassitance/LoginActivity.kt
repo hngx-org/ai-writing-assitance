@@ -39,6 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 import com.example.aiwritingassitance.ui.theme.Blue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +57,15 @@ class LoginActivity : ComponentActivity() {
                 //val viewModel: LoginViewModel = hiltViewModel()
 
                 var loginEmail by remember {
-                    mutableStateOf(email)
+                    mutableStateOf("")
                 }
 
                 var loginPassword by remember {
-                    mutableStateOf(password)
+                    mutableStateOf("")
                 }
+
+                var isLoading by remember {
+                    mutableStateOf(false) }
 
                 val isDataValidated by remember {
                     derivedStateOf {
@@ -87,19 +93,27 @@ class LoginActivity : ComponentActivity() {
 
                     )
 
-                    loginEmail?.let {
-                        loginPassword?.let { it1 ->
-                            LoginFields(email = it, password = it1,
+                            LoginFields(email = loginEmail, password = loginPassword,
                                 onEmailChange = { loginEmail = it },
                                 onPasswordChange = { loginPassword = it })
-                        }
-                    }
 
+                    if (isLoading) {
+                        CircularProgressIndicator()
+                    }
 
                     Button(
                         onClick = {
-                            Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
-                                startActivity(it)
+                            isLoading = true
+                            var loginResult : Boolean
+                            CoroutineScope(Dispatchers.IO).launch {
+                                 loginResult = authService.loginIn(email = loginEmail, password = loginPassword)
+                                if(loginResult) {
+                                    Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
+                                        startActivity(it)
+                                    }
+                                } else {
+                                    isLoading = false
+                                }
                             }
                         },
                         shape = RoundedCornerShape(5.dp),
@@ -116,6 +130,8 @@ class LoginActivity : ComponentActivity() {
                             fontSize = 14.sp
                         )
                     }
+
+
                 }
 
             }
