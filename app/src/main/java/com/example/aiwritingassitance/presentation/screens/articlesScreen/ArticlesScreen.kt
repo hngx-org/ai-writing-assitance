@@ -1,7 +1,9 @@
 package com.example.aiwritingassitance.presentation.screens.articlesScreen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.aiwritingassitance.R
+import com.example.aiwritingassitance.presentation.screens.ChatViewModel
 import com.example.aiwritingassitance.presentation.screens.common.PageContent
 
 
@@ -26,7 +29,8 @@ import com.example.aiwritingassitance.presentation.screens.common.PageContent
 @Composable
 fun ArticlesScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: ArticleViewModel,
 ) {
 
     Scaffold(
@@ -60,9 +64,21 @@ fun ArticlesScreen(
             modifier = modifier.padding(it),
             pgName = "Article",
             pgTitle = "Write Brilliant Articles Effortlessly",
+            viewModel = viewModel,
             inputLabel = "e.g 10 Tips for productive Remote Work",
             btnColor = Color(0xFF157E15),
+            response = viewModel.articleResponse
         )
+
+//        Column(modifier.padding(it)) {
+//            Button(onClick = { viewModel.getResponse() }) {
+//                Text(
+//                    text = "Print",
+//                )
+//            }
+//            Text(text = viewModel.response)
+//        }
+
     }
 
 }

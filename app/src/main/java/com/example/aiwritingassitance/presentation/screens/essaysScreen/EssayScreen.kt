@@ -28,6 +28,7 @@ import com.example.aiwritingassitance.presentation.screens.common.PageContent
 fun EssayScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
+    viewModel: EssayViewModel
 ) {
 
 
@@ -64,8 +65,10 @@ fun EssayScreen(
             pgTitle = "Essay Perfection at your Fingertips",
             inputLabel = "e.g Digital Privacy Concerns",
             btnColor = Color(0xFFff6600),
-        ) { essay ->
-//            viewModel.getEssay(essay)
+            essayViewModel = viewModel,
+            response = viewModel.EssayResponse,
+        ) { essay->
+            viewModel.getEssayResponse(prompt = viewModel.essayTopic, userId = "400")
         }
     }
 }

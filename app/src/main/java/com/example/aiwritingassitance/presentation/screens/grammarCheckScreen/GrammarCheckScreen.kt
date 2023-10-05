@@ -26,7 +26,8 @@ import com.example.aiwritingassitance.presentation.screens.common.PageContent
 @Composable
 fun GrammarCheckScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: GrammarCheckViewModel,
 ) {
 
     Scaffold(

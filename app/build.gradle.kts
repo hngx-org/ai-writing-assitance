@@ -10,11 +10,11 @@ plugins {
 
 android {
     namespace = "com.example.aiwritingassitance"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.aiwritingassitance"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -98,6 +98,11 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
+
+    //loginAuth
+    implementation ("com.github.hngx-org:mirage-kotlin-auth-library:2.0.0")
+
+    implementation("com.github.hngx-org:openai-api-library:0.1.3")
 }
 
 kapt {
