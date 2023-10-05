@@ -60,12 +60,18 @@ class BottomNavigationActivity : ComponentActivity() {
             val authService = AuthService(applicationContext)
 
 
-            val intent = Intent()
+            val intent = intent
             var userId = intent.getStringExtra("UserId")
             var userEmail = intent.getStringExtra("UserEmail")
             var  userName = intent.getStringExtra("UserName")
             var userCredit = intent.getStringExtra("UserCredit")
             var userCookies = intent.getStringExtra("UserCookies")
+
+            if (userCookies != null) {
+                Log.d("ApiResponseResult", userCookies)
+            }
+
+
 
 
 
