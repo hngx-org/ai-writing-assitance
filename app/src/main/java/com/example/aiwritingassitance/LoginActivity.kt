@@ -3,6 +3,7 @@ package com.example.aiwritingassitance
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -55,7 +56,7 @@ class LoginActivity : ComponentActivity() {
 
             AIWritingAssitanceTheme {
                 val authService = AuthService(applicationContext)
-                var userData : UserData = UserData(id = "", email = "", userName = "", userCredit = "")
+                var userData : UserData = UserData(id = "", email = "", userName = "", userCredit = -1)
 
                 //val viewModel: LoginViewModel = hiltViewModel()
 
@@ -110,7 +111,7 @@ class LoginActivity : ComponentActivity() {
                             var loginResponse : UserData
                             CoroutineScope(Dispatchers.IO).launch {
                                  loginResponse = authService.loginIn(email = loginEmail, password = loginPassword)
-                                if(loginResponse.id.length > 1) {
+                                if(loginResponse.userCredit >= 0) {
                                     Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
                                         it.putExtra("UserId", loginResponse.id)
                                         it.putExtra("UserEmail", loginResponse.email)
@@ -121,6 +122,8 @@ class LoginActivity : ComponentActivity() {
                                     }
                                 } else {
                                     isLoading = false
+                                    //Toast.makeText( this@LoginActivity,"User Detail does not exist", Toast.LENGTH_LONG).show()
+                                    Log.d("ApiResponseResult", loginResponse.toString())
                                 }
                             }
                         },
