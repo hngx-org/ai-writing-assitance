@@ -52,10 +52,14 @@ class BottomNavigationActivity : ComponentActivity() {
     val grammarCheckViewModel by viewModels<GrammarCheckViewModel>()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val authService = AuthService(applicationContext)
+
+            val intent = intent
+            val userId = intent.getStringExtra("UserId")
+
 
             AIWritingAssitanceTheme {
                 var navController = rememberNavController()
@@ -101,7 +105,7 @@ class BottomNavigationActivity : ComponentActivity() {
                             )
                         }
                         composable(ChatDestination.route) { ChatScreen(navController = navController) }
-                        composable(AccountDestination.route) { AccountScreen() }
+                        composable(AccountDestination.route) { AccountScreen(authService = authService, context = this@BottomNavigationActivity)}
 
 
                         //richard
@@ -121,6 +125,7 @@ class BottomNavigationActivity : ComponentActivity() {
                                 navController = navController,
                                 // TODO:
                                 viewModel = articleViewModel,
+                                userId = userId!!,
                             )
                         }
                         composable(route = Screens.EssaysScreen.name) {

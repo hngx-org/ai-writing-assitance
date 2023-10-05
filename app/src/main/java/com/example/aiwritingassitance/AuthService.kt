@@ -25,6 +25,10 @@ class AuthService(context: Context) {
 
     val loginRepository = AuthLibrary.createLoginRepository(apiService = apiService, dataStoreRepository = dataStoreRepository)
 
+    val logoutRepository = AuthLibrary.createLogoutRepository(apiService)
+
+
+
 
     suspend fun signUp(name : String, email : String, password : String) : Boolean {
         var result : ApiResponse<AuthResponse>
@@ -92,6 +96,23 @@ class AuthService(context: Context) {
             }
         }
         return userData
+    }
+
+    suspend fun loginOut(){
+        val result  = logoutRepository.logout()
+
+        when(result) {
+
+            is ApiResponse.Error -> {
+                val message = result.message
+                Log.d("ApiResponseResult", message)
+            }
+
+            is ApiResponse.Success -> {
+                val authResponse = result.data
+                Log.d("ApiResponseResult", authResponse.toString())
+            }
+        }
     }
 }
 
