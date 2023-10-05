@@ -31,6 +31,7 @@ fun ArticlesScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     viewModel: ArticleViewModel,
+    userId : String,
 ) {
 
     Scaffold(
@@ -69,7 +70,7 @@ fun ArticlesScreen(
             btnColor = Color(0xFF157E15),
             response = viewModel.articleResponse
         ){
-            viewModel.getArticleResponse(prompt = viewModel.articleTopic, userId = "")
+            viewModel.getArticleResponse(prompt = viewModel.articleTopic, userId = userId)
         }
 
 //        Column(modifier.padding(it)) {

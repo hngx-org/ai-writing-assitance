@@ -17,13 +17,18 @@ class ArticleViewModel: ViewModel() {
     var articleResponse by mutableStateOf("")
         private set
 
-    fun getArticleResponse(prompt: String, userId: String = "20"){
+    fun getArticleResponse(prompt: String, userId: String){
 
         try {
-            val essayPrompt = "Generate an article based on the following topic: $articleTopic"
+            val articlePrompt = "Generate an article based on the following topic: $articleTopic. \n" +
+                    "Your result should only contain the article content and no other thing. Your article should be very detailed. If the article topic doesn't sound like a topic give an error message of \"Please enter a valid article topic\""
 
             viewModelScope.launch {
-                var generatedResponse = OpenAiCaller.generateChatResponse(essayPrompt, userId)
+                if (articleTopic.isEmpty()){
+                    return@launch
+                }
+
+                var generatedResponse = OpenAiCaller.generateChatResponse(articlePrompt, "session=$userId")
                 // Do something with response
                 articleResponse = generatedResponse
                 articleTopic = ""

@@ -285,7 +285,7 @@ fun PageContent(
                 .padding(10.dp)
                 .clickable {
                     // TODO
-                    onGenerateClick(viewModel.articleTopic)
+                    onGenerateClick(viewModel.articleTopic, )
                 },
             colors = CardDefaults.cardColors(
                 containerColor = btnColor,

@@ -20,9 +20,14 @@ class EssayViewModel: ViewModel() {
     fun getEssayResponse(prompt: String, userId: String = "20"){
 
         try {
-            val essayPrompt = "Generate an essay based on the following topic: $essayTopic"
+            val essayPrompt = "Generate an essay based on the following topic: $essayTopic. \n" +
+                    "Your result should only contain the essay content and no other thing. Your essay should be detailed. If the essay topic doesn't sound like a topic give an error message of \"Please enter a valid essay topic\""
 
             viewModelScope.launch {
+                if (essayTopic.isEmpty()){
+                    return@launch
+                }
+
                 var generatedResponse = OpenAiCaller.generateChatResponse(essayPrompt, userId)
                 // Do something with response
                 EssayResponse = generatedResponse
