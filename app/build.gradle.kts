@@ -107,6 +107,9 @@ dependencies {
     //mutableStateFlow
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-alpha02")
 
+    //OpenAI
+    implementation("com.github.hngx-org:openai-api-library:0.1.3")
+
 
 }
 
