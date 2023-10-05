@@ -109,15 +109,20 @@ class LoginActivity : ComponentActivity() {
                         onClick = {
                             isLoading = true
                             var loginResponse : UserData
+                            var cookies : String
                             CoroutineScope(Dispatchers.IO).launch {
                                  loginResponse = authService.loginIn(email = loginEmail, password = loginPassword)
+                                    cookies = authService.profile()
+                                    Log.d("ApiResponseResult", cookies)
+                                 //   Log.d("ApiResponseResult", loginResponse.toString())
                                 if(loginResponse.userCredit >= 0) {
                                     Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
                                         it.putExtra("UserId", loginResponse.id)
                                         it.putExtra("UserEmail", loginResponse.email)
                                         it.putExtra("UserName", loginResponse.userName)
                                         it.putExtra("UserCredit", loginResponse.userCredit)
-                                        Log.d("ApiResponseResult", loginResponse.toString())
+                                        it.putExtra("UserCookies", cookies)
+                                    //    Log.d("ApiResponseResult", loginResponse.toString())
                                         startActivity(it)
                                     }
                                 } else {

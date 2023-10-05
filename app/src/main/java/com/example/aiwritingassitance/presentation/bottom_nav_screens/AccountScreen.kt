@@ -76,7 +76,9 @@ fun AccountScreen(context: BottomNavigationActivity, authService: AuthService) {
                 Row(modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 8.dp)
-                    .clickable { },
+                    .clickable {
+
+                    },
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly) {
                     Text(text = "Profile", modifier = Modifier.weight(1f), style = MaterialTheme.typography.headlineSmall)

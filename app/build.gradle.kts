@@ -101,7 +101,7 @@ dependencies {
 
 
     //loginAuth
-    implementation ("com.github.hngx-org:mirage-kotlin-auth-library:2.0.0")
+    implementation ("com.github.hngx-org:mirage-kotlin-auth-library:3.0.0")
 
 
     //mutableStateFlow
