@@ -99,10 +99,15 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
+
     //loginAuth
     implementation ("com.github.hngx-org:mirage-kotlin-auth-library:2.0.0")
 
-    implementation("com.github.hngx-org:openai-api-library:0.1.3")
+
+    //mutableStateFlow
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-alpha02")
+
+
 }
 
 kapt {
