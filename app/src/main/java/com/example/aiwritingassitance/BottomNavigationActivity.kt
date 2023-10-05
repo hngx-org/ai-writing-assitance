@@ -1,6 +1,8 @@
 package com.example.aiwritingassitance
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -57,6 +59,15 @@ class BottomNavigationActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val authService = AuthService(applicationContext)
+
+            val intent = Intent()
+            var userId = intent.getStringExtra("UserId")
+            var userEmail = intent.getStringExtra("UserEmail")
+            var  userName = intent.getStringExtra("UserName")
+            var userCredit = intent.getStringExtra("UserCredit")
+            var userCookies = intent.getStringExtra("UserCookies")
+
+
 
             AIWritingAssitanceTheme {
                 var navController = rememberNavController()

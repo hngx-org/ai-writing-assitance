@@ -8,6 +8,7 @@ import com.shegs.hng_auth_library.model.AuthResponse
 import com.shegs.hng_auth_library.model.LoginRequest
 import com.shegs.hng_auth_library.model.SignupRequest
 import com.shegs.hng_auth_library.network.ApiResponse
+import com.shegs.hng_auth_library.network.RetrofitClient
 import java.util.Date
 
 class AuthService(context: Context) {
@@ -26,6 +27,8 @@ class AuthService(context: Context) {
     val loginRepository = AuthLibrary.createLoginRepository(apiService = apiService, dataStoreRepository = dataStoreRepository)
 
     val logoutRepository = AuthLibrary.createLogoutRepository(apiService)
+
+    val profileRepository = AuthLibrary.createProfileRepository(apiService)
 
 
 
@@ -81,7 +84,7 @@ class AuthService(context: Context) {
                 loginResponseId = authResponse.data.id
                 loginResponseEmail = authResponse.data.email
                 loginResponseUsername = authResponse.data.name
-                loginResponseCredit = authResponse.data.credit
+                loginResponseCredit = authResponse.data.credits
 
                 userData = UserData(id = loginResponseId,
                     email = loginResponseEmail,
@@ -113,6 +116,29 @@ class AuthService(context: Context) {
                 Log.d("ApiResponseResult", authResponse.toString())
             }
         }
+    }
+
+    suspend fun profile() : String{
+
+        val result: ApiResponse<AuthResponse> = profileRepository.profile()
+
+        //var cookies: String = "";
+        var cookies = RetrofitClient.getCookiesForUrl().toString()
+
+        when(result) {
+            is ApiResponse.Error -> {
+                val message = result.message
+              //  Log.d("ApiResponseResult", message)
+            }
+
+            is ApiResponse.Success -> {
+                val authResponse = result.data
+              //  Log.d("ApiResponseResult", authResponse.toString())
+              //  Log.d("ApiResponseResult", cookies)
+              //  Log.d("ApiResponseResult", cookies)
+            }
+        }
+        return cookies
     }
 }
 
