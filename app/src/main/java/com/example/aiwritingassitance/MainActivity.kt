@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 //import com.example.aiwritingassitance.presentation.navigation.ChatNavigation
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
+import com.example.apilibrary.wrapperclass.OpenAiCaller
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
