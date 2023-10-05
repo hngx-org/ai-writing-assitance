@@ -2,6 +2,7 @@ package com.example.aiwritingassitance
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.aiwritingassitance.data.UserData
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 import com.example.aiwritingassitance.ui.theme.Blue
 import kotlinx.coroutines.CoroutineScope
@@ -53,6 +55,7 @@ class LoginActivity : ComponentActivity() {
 
             AIWritingAssitanceTheme {
                 val authService = AuthService(applicationContext)
+                var userData : UserData = UserData(id = "", email = "", userName = "", userCredit = "")
 
                 //val viewModel: LoginViewModel = hiltViewModel()
 
@@ -104,11 +107,16 @@ class LoginActivity : ComponentActivity() {
                     Button(
                         onClick = {
                             isLoading = true
-                            var loginResult : Boolean
+                            var loginResponse : UserData
                             CoroutineScope(Dispatchers.IO).launch {
-                                 loginResult = authService.loginIn(email = loginEmail, password = loginPassword)
-                                if(loginResult) {
+                                 loginResponse = authService.loginIn(email = loginEmail, password = loginPassword)
+                                if(loginResponse.id.length > 1) {
                                     Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
+                                        it.putExtra("UserId", loginResponse.id)
+                                        it.putExtra("UserEmail", loginResponse.email)
+                                        it.putExtra("UserName", loginResponse.userName)
+                                        it.putExtra("UserCredit", loginResponse.userCredit)
+                                        Log.d("ApiResponseResult", loginResponse.toString())
                                         startActivity(it)
                                     }
                                 } else {
