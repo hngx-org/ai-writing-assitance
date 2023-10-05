@@ -3,6 +3,7 @@ package com.example.aiwritingassitance
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,9 +27,14 @@ import com.example.aiwritingassitance.presentation.bottom_nav_screens.allDestina
 import com.example.aiwritingassitance.presentation.navigation.Screens
 import com.example.aiwritingassitance.presentation.screens.articlesScreen.ArticlesScreen
 import com.example.aiwritingassitance.presentation.bottom_nav_screens.chatScreen.ChatScreen
+import com.example.aiwritingassitance.presentation.screens.ChatViewModel
+import com.example.aiwritingassitance.presentation.screens.articlesScreen.ArticleViewModel
 import com.example.aiwritingassitance.presentation.screens.emailScreen.EmailScreen
+import com.example.aiwritingassitance.presentation.screens.emailScreen.EmailViewModel
 import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayScreen
+import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayViewModel
 import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckScreen
+import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckViewModel
 import com.example.aiwritingassitance.presentation.screens.plansScreen.CheckoutScreen
 import com.example.aiwritingassitance.presentation.screens.plansScreen.PlansScreen
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
@@ -38,6 +44,14 @@ import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 class BottomNavigationActivity : ComponentActivity() {
 
     private var selectedItem by mutableStateOf(0)
+
+    val chatViewModel by viewModels<ChatViewModel>()
+    val emailViewModel by viewModels<EmailViewModel>()
+    val articleViewModel by viewModels<ArticleViewModel>()
+    val essayViewModel by viewModels<EssayViewModel>()
+    val grammarCheckViewModel by viewModels<GrammarCheckViewModel>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,16 +111,29 @@ class BottomNavigationActivity : ComponentActivity() {
                             )
                         }
                         composable(route = Screens.EmailScreen.name) {
-                            EmailScreen(navController = navController)
+                            EmailScreen(
+                                navController = navController,
+                                viewModel = emailViewModel,
+                            )
                         }
                         composable(route = Screens.ArticlesScreen.name) {
-                            ArticlesScreen(navController = navController)
+                            ArticlesScreen(
+                                navController = navController,
+                                // TODO:
+                                viewModel = articleViewModel,
+                            )
                         }
                         composable(route = Screens.EssaysScreen.name) {
-                            EssayScreen(navController = navController)
+                            EssayScreen(
+                                navController = navController,
+                                viewModel = essayViewModel,
+                            )
                         }
                         composable(route = Screens.GrammarCheckScreen.name) {
-                            GrammarCheckScreen(navController = navController)
+                            GrammarCheckScreen(
+                                navController = navController,
+                                viewModel = grammarCheckViewModel,
+                            )
                         }
 
 

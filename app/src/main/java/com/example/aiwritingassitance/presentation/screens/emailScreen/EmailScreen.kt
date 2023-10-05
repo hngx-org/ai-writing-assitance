@@ -26,7 +26,8 @@ import com.example.aiwritingassitance.presentation.screens.common.PageContent
 @Composable
 fun EmailScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: EmailViewModel,
 ) {
 
 
@@ -64,6 +65,7 @@ fun EmailScreen(
             topicLabel = "e.g Resignation Letter",
             toLabel = "e.g My Boss",
             btnColor = Color(0xFF1165E4),
+            emailViewModel = viewModel,
         )
     }
 }
