@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,29 +44,35 @@ import com.example.aiwritingassitance.ui.theme.Blue
 import com.example.aiwritingassitance.ui.theme.Grey
 import com.example.aiwritingassitance.ui.theme.Neutral1
 import com.example.aiwritingassitance.ui.theme.Neutral2
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AIWritingAssitanceTheme {
 
-                val intent = intent
-                val isToken = intent.getBooleanExtra("EntryMessage", true)
+
+            AIWritingAssitanceTheme {
+                val authService = AuthService(applicationContext)
+
+                /*val intent = intent
+                val isToken = intent.getBooleanExtra("EntryMessage", true)*/
 
 
                 var email by remember { mutableStateOf("") }
                 var password by remember { mutableStateOf("") }
                 var name by remember { mutableStateOf("") }
                 var confirmPassword by remember { mutableStateOf("") }
+                var isLoading by remember { mutableStateOf(false) }
 
                 val isDataValidated by remember {
                     derivedStateOf {
                          name != "" && email != "" && password != "" && confirmPassword != ""  && password == confirmPassword
                     }
                 }
-                //var showPassword by remember { mutableStateOf("false") }
-
 
                 Column(
                     modifier = Modifier
@@ -107,15 +114,32 @@ class SignUpActivity : ComponentActivity() {
                             confirmPassword = it
                         }
                     )
+                    if (isLoading) {
+                        CircularProgressIndicator()
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
                     Button(
                         onClick = {
-                            Intent(this@SignUpActivity, LoginActivity::class.java).also {
-                                it.putExtra("EntryMessage", isToken)
-                                startActivity(it)
+
+                            isLoading = true
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val signUpResult = authService.signUp(name = name, email = email, password = password)
+                                Log.d("ApiResponseResult", "$name $email $password")
+
+                                if(signUpResult){
+                                    Intent(this@SignUpActivity, LoginActivity::class.java).also {
+                                        it.putExtra("UserEmail", email)
+                                        it.putExtra("UserPassword", password)
+                                        startActivity(it)
+                                    }
+                                } else {
+                                    isLoading = false
+                                }
+
+
+                                Log.d("Debuggg", "Gooooooo")
                             }
-                            Log.d("Debuggg", "Gooooooo")
 
                         },
                         shape = RoundedCornerShape(5.dp),
@@ -131,7 +155,7 @@ class SignUpActivity : ComponentActivity() {
                     Button(
                         onClick = {
                             Intent(this@SignUpActivity, LoginActivity::class.java).also {
-                                it.putExtra("EntryMessage", isToken)
+                               // it.putExtra("EntryMessage", isToken)
                                 startActivity(it)
                             }
                         },
@@ -142,6 +166,7 @@ class SignUpActivity : ComponentActivity() {
                     ) {
                         Text(text = "Already have an account", color = Neutral1)
                     }
+
                 }
             }
         }
