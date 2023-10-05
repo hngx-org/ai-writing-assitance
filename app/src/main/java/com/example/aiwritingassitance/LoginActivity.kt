@@ -2,6 +2,8 @@ package com.example.aiwritingassitance
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -37,17 +39,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.aiwritingassitance.data.UserData
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 import com.example.aiwritingassitance.ui.theme.Blue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val intent = intent
-            val isToken = intent.getBooleanExtra("EntryMessage", true)
+            val email = intent.getStringExtra("UserEmail")
+            val password = intent.getStringExtra("UserPassword")
 
             AIWritingAssitanceTheme {
+                val authService = AuthService(applicationContext)
+                var userData : UserData = UserData(id = "", email = "", userName = "", userCredit = -1)
 
                 //val viewModel: LoginViewModel = hiltViewModel()
 
@@ -58,6 +67,9 @@ class LoginActivity : ComponentActivity() {
                 var loginPassword by remember {
                     mutableStateOf("")
                 }
+
+                var isLoading by remember {
+                    mutableStateOf(false) }
 
                 val isDataValidated by remember {
                     derivedStateOf {
@@ -85,15 +97,34 @@ class LoginActivity : ComponentActivity() {
 
                     )
 
-                    LoginFields(email = loginEmail, password = loginPassword,
-                        onEmailChange = { loginEmail = it },
-                        onPasswordChange = { loginPassword = it })
+                            LoginFields(email = loginEmail, password = loginPassword,
+                                onEmailChange = { loginEmail = it },
+                                onPasswordChange = { loginPassword = it })
 
+                    if (isLoading) {
+                        CircularProgressIndicator()
+                    }
 
                     Button(
                         onClick = {
-                            Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
-                                startActivity(it)
+                            isLoading = true
+                            var loginResponse : UserData
+                            CoroutineScope(Dispatchers.IO).launch {
+                                 loginResponse = authService.loginIn(email = loginEmail, password = loginPassword)
+                                if(loginResponse.userCredit >= 0) {
+                                    Intent(this@LoginActivity, BottomNavigationActivity::class.java).also {
+                                        it.putExtra("UserId", loginResponse.id)
+                                        it.putExtra("UserEmail", loginResponse.email)
+                                        it.putExtra("UserName", loginResponse.userName)
+                                        it.putExtra("UserCredit", loginResponse.userCredit)
+                                        Log.d("ApiResponseResult", loginResponse.toString())
+                                        startActivity(it)
+                                    }
+                                } else {
+                                    isLoading = false
+                                    //Toast.makeText( this@LoginActivity,"User Detail does not exist", Toast.LENGTH_LONG).show()
+                                    Log.d("ApiResponseResult", loginResponse.toString())
+                                }
                             }
                         },
                         shape = RoundedCornerShape(5.dp),
@@ -110,6 +141,8 @@ class LoginActivity : ComponentActivity() {
                             fontSize = 14.sp
                         )
                     }
+
+
                 }
 
             }
