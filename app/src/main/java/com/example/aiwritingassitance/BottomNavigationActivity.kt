@@ -56,6 +56,7 @@ class BottomNavigationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val authService = AuthService(applicationContext)
 
             AIWritingAssitanceTheme {
                 var navController = rememberNavController()
@@ -101,7 +102,7 @@ class BottomNavigationActivity : ComponentActivity() {
                             )
                         }
                         composable(ChatDestination.route) { ChatScreen(navController = navController) }
-                        composable(AccountDestination.route) { AccountScreen() }
+                        composable(AccountDestination.route) { AccountScreen(authService = authService, context = this@BottomNavigationActivity)}
 
 
                         //richard

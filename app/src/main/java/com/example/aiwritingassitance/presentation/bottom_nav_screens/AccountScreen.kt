@@ -1,5 +1,8 @@
 package com.example.aiwritingassitance.presentation.bottom_nav_screens
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -31,10 +34,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aiwritingassitance.AuthService
+import com.example.aiwritingassitance.BottomNavigationActivity
 import com.example.aiwritingassitance.R
+import com.example.aiwritingassitance.SignUpActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun AccountScreen() {
+fun AccountScreen(context: BottomNavigationActivity, authService: AuthService) {
     var darkMode by remember {
         mutableStateOf(false)
     }
@@ -93,11 +102,25 @@ fun AccountScreen() {
                 Row(modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 8.dp)
-                    .clickable { },
+                    .clickable { CoroutineScope(Dispatchers.IO).launch {
+                        authService.loginOut()
+                        val intent =Intent(context, SignUpActivity::class.java)
+                        context.startActivity(intent)
+                        Log.d("ApiResponseResult", "Goooo")
+                    } },
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly) {
                     Text(text = "Logout", modifier = Modifier.weight(1f), style = MaterialTheme.typography.headlineSmall)
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        Log.d("ApiResponseResult", "Goooo")
+                        CoroutineScope(Dispatchers.IO).launch {
+                            authService.loginOut()
+                            val intent =Intent(context, SignUpActivity::class.java)
+                            context.startActivity(intent)
+                            Log.d("ApiResponseResult", "Goooo")
+                        }
+
+                    }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "Profile" )
                     }
                 }
@@ -132,5 +155,5 @@ fun setDarkMode(enableDarkMode: Boolean) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewAccountScreen(){
-    AccountScreen()
+   // AccountScreen()
 }
