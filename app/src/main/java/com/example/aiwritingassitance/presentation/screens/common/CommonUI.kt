@@ -40,6 +40,7 @@ import com.example.aiwritingassitance.presentation.screens.ChatViewModel
 import com.example.aiwritingassitance.presentation.screens.articlesScreen.ArticleViewModel
 import com.example.aiwritingassitance.presentation.screens.emailScreen.EmailViewModel
 import com.example.aiwritingassitance.presentation.screens.essaysScreen.EssayViewModel
+import com.example.aiwritingassitance.presentation.screens.grammarCheckScreen.GrammarCheckViewModel
 
 
 /**FOR ESSAY*/
@@ -284,7 +285,7 @@ fun PageContent(
                 .padding(10.dp)
                 .clickable {
                     // TODO
-                    onGenerateClick(viewModel.articleTopic)
+                    onGenerateClick(viewModel.articleTopic, )
                 },
             colors = CardDefaults.cardColors(
                 containerColor = btnColor,
@@ -441,7 +442,7 @@ fun PageContent(
                 .padding(10.dp)
                 .clickable {
                     // TODO:
-//                           onGenerateClick(pass topic string here)
+                    onGenerateClick(emailViewModel.emailTopic)
                 },
             colors = CardDefaults.cardColors(
                 containerColor = btnColor,
@@ -514,7 +515,8 @@ fun PageContent(
     pgTitle: String = "A simple one click email generator",
     inputLabel: String = "e.g Generate an email to my boss",
     btnColor: Color = Color(0xFF0D2777),
-    onGenerateClick: (String) -> Unit = {},
+    grammarCheckViewModel: GrammarCheckViewModel,
+    onRefineClick: (String) -> Unit = {},
 ) {
 
     var userInput by remember {
@@ -555,8 +557,10 @@ fun PageContent(
             )
             EditTextField(
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = {},
-                value = userInput,
+                onValueChange = { text ->
+                    grammarCheckViewModel.inputText = text
+                },
+                value = grammarCheckViewModel.inputText,
                 label = inputLabel,
                 maxLines = maxLines,
             )
@@ -575,7 +579,7 @@ fun PageContent(
                 .padding(10.dp)
                 .clickable {
                     // TODO:
-//                           onGenerateClick(pass topic string here)
+                    onRefineClick(grammarCheckViewModel.inputText)
                 },
             colors = CardDefaults.cardColors(
                 containerColor = btnColor,
@@ -633,21 +637,9 @@ fun PageContent(
                 fontSize = 19.sp,
                 fontFamily = FontFamily(Font(R.font.spacegrotesk_light))
             ),
-            text = "Use System Prompts:\n" +
-                    "\n" +
-                    "OpenAI provides a set of system prompts that are designed to be used with the chat models. You can use these as a starting point and add your specific instructions.\n" +
-                    "Iterate and Experiment:\n" +
-                    "\n" +
-                    "It may take some experimentation to get the desired output. Feel free to iterate on your prompts and instructions to fine-tune the model's responses.\n" +
-                    "Evaluate and Filter Responses:\n" +
-                    "\n" +
-                    "After receiving responses, you can post-process and filter them to ensure they meet your requirements for tone and topic. You can also add a feedback loop to improve the model's performance over time.\n" +
-                    "Remember that prompt engineering may require some trial and error to find the right balance of instructions and constraints. Additionally, it's essential to stay within the ethical boundaries and guidelines when using AI models to generate content." +
-                    "Evaluate and Filter Responses:\n" +
-                    "\n" +
-                    "After receiving responses, you can post-process and filter them to ensure they meet your requirements for tone and topic. You can also add a feedback loop to improve the model's performance over time.\n" +
-                    "Remember that prompt engineering may require some trial and error to find the right balance of instructions and constraints. Additionally, it's essential to stay within the ethical boundaries and guidelines when using AI models to generate content."
+            text = grammarCheckViewModel.refinedText
         )
+        Text(text = grammarCheckViewModel.inputText)
     }
 }
 

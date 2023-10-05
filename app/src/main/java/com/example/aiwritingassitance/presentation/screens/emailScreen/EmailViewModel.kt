@@ -22,12 +22,23 @@ class EmailViewModel: ViewModel() {
     fun getEmailResponse(prompt: String, userId: String = "20"){
 
         try {
-            val emailPrompt = "Generate an email based on the following topic: $emailTopic to the following person $emailDestination"
+//            val emailPrompt = "Generate an email based on the following topic: $emailTopic to the following person $emailDestination"
+
+            val emailPrompt = "\n" +
+                    "Generate an email based on the following topic: $emailTopic, and to the following person: $emailDestination. \n" +
+                    "Your result should only contain the email content and no other thing. Your email should be detailed. If the email topic doesn't sound like a topic give an error message of \"Please enter a valid email topic\". If the person stated doesn't sound like a valid noun or pronoun, give an error message of \"Please enter a valid person\""
+
 
             viewModelScope.launch {
+                if (emailTopic.isEmpty() || emailDestination.isEmpty()){
+                    return@launch
+                }
+
                 var generatedResponse = OpenAiCaller.generateChatResponse(emailPrompt, userId)
                 // Do something with response
                 EmailResponse = generatedResponse
+                emailTopic = ""
+                emailDestination = ""
                 Log.d("TAG9999", "getResponse: $generatedResponse")
             }
             Log.d("TAG999", "getResponse: $EmailResponse")

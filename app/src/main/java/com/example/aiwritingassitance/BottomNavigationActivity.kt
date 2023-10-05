@@ -54,11 +54,11 @@ class BottomNavigationActivity : ComponentActivity() {
     val grammarCheckViewModel by viewModels<GrammarCheckViewModel>()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val authService = AuthService(applicationContext)
+
 
             val intent = Intent()
             var userId = intent.getStringExtra("UserId")
@@ -133,6 +133,7 @@ class BottomNavigationActivity : ComponentActivity() {
                                 navController = navController,
                                 // TODO:
                                 viewModel = articleViewModel,
+                                userId = userId!!,
                             )
                         }
                         composable(route = Screens.EssaysScreen.name) {

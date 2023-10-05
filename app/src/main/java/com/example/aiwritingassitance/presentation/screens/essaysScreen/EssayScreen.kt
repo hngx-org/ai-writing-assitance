@@ -67,7 +67,7 @@ fun EssayScreen(
             btnColor = Color(0xFFff6600),
             essayViewModel = viewModel,
             response = viewModel.EssayResponse,
-        ) { essay->
+        ) { essay ->
             viewModel.getEssayResponse(prompt = viewModel.essayTopic, userId = "400")
         }
     }
