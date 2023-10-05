@@ -68,7 +68,9 @@ fun ArticlesScreen(
             inputLabel = "e.g 10 Tips for productive Remote Work",
             btnColor = Color(0xFF157E15),
             response = viewModel.articleResponse
-        )
+        ){
+            viewModel.getArticleResponse(prompt = viewModel.articleTopic, userId = "")
+        }
 
 //        Column(modifier.padding(it)) {
 //            Button(onClick = { viewModel.getResponse() }) {

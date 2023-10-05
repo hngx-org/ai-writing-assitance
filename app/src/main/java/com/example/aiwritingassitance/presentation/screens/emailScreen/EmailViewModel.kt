@@ -28,6 +28,8 @@ class EmailViewModel: ViewModel() {
                 var generatedResponse = OpenAiCaller.generateChatResponse(emailPrompt, userId)
                 // Do something with response
                 EmailResponse = generatedResponse
+                emailTopic = ""
+                emailDestination = ""
                 Log.d("TAG9999", "getResponse: $generatedResponse")
             }
             Log.d("TAG999", "getResponse: $EmailResponse")

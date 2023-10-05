@@ -66,6 +66,8 @@ fun EmailScreen(
             toLabel = "e.g My Boss",
             btnColor = Color(0xFF1165E4),
             emailViewModel = viewModel,
-        )
+        ) { emailTopic ->
+            viewModel.getEmailResponse(prompt = viewModel.emailTopic, userId = "")
+        }
     }
 }

@@ -26,6 +26,7 @@ class EssayViewModel: ViewModel() {
                 var generatedResponse = OpenAiCaller.generateChatResponse(essayPrompt, userId)
                 // Do something with response
                 EssayResponse = generatedResponse
+                essayTopic = ""
                 Log.d("TAG9999", "getResponse: $generatedResponse")
             }
             Log.d("TAG999", "getResponse: $EssayResponse")

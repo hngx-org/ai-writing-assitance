@@ -64,7 +64,10 @@ fun GrammarCheckScreen(
             pgTitle = "Fix Grammatical errors by simple copy and paste",
             inputLabel = "Paste Sentence, Phrase",
             btnColor = Color(0xFF999900),
-        )
+            grammarCheckViewModel = viewModel
+        ) { text ->
+            viewModel.refactorText(prompt = viewModel.inputText, userId = "23ui23")
+        }
 
     }
 

@@ -11,26 +11,26 @@ import kotlinx.coroutines.launch
 
 class GrammarCheckViewModel: ViewModel() {
 
-    var essayTopic by mutableStateOf("")
+    var inputText by mutableStateOf("")
 
-
-    var EssayResponse by mutableStateOf("")
+    var refinedText by mutableStateOf("")
         private set
 
-    fun getEssayResponse(prompt: String, userId: String = "20"){
+    fun refactorText(prompt: String, userId: String = "20"){
 
         try {
-            val essayPrompt = "Generate an essay based on the following topic: $essayTopic"
+            val refinePrompt = "Refine the following text: $inputText"
 
             viewModelScope.launch {
-                var generatedResponse = OpenAiCaller.generateChatResponse(essayPrompt, userId)
+                var generatedResponse = OpenAiCaller.generateChatResponse(refinePrompt, userId)
                 // Do something with response
-                EssayResponse = generatedResponse
+                refinedText = generatedResponse
+                inputText = ""
                 Log.d("TAG9999", "getResponse: $generatedResponse")
             }
-            Log.d("TAG999", "getResponse: $EssayResponse")
+            Log.d("TAG999", "getResponse: $refinedText")
         }catch (e: Exception){
-            EssayResponse = e.message.toString()
+            refinedText = e.message.toString()
             Log.d("Error99999", "getResponse: ${e.message.toString()}")
         }
     }
