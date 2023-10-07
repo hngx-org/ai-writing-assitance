@@ -57,6 +57,8 @@ fun HomeScreen(
     onNavigateToReward: () -> Unit,
     modifier: Modifier = Modifier,
     //viewModel: HomeViewModel = HomeViewModel(),
+    userName: String,
+    userCredit: String
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -77,7 +79,7 @@ fun HomeScreen(
                             )
 
                             Text(
-                                text = "Ufuoma Isaac ",
+                                text = "$userName ",
                                 fontWeight = FontWeight.Normal,
                                 fontSize = 16.sp
                             )
@@ -299,7 +301,7 @@ fun PromptCards(modifier: Modifier, promptMessage: String) {
     ) {
         Text(
             text = promptMessage,
-            Modifier.padding(5.dp),
+            Modifier.padding(15.dp),
             color = Neutral2
         )
     }
