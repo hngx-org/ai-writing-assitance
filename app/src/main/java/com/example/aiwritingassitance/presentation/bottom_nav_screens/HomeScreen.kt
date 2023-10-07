@@ -301,7 +301,7 @@ fun PromptCards(modifier: Modifier, promptMessage: String) {
     ) {
         Text(
             text = promptMessage,
-            Modifier.padding(15.dp),
+            Modifier.padding(5.dp),
             color = Neutral2
         )
     }
