@@ -7,23 +7,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -39,6 +32,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.aiwritingassitance.loginactivity.LoginActivity
 import com.example.aiwritingassitance.ui.theme.AIWritingAssitanceTheme
 import com.example.aiwritingassitance.ui.theme.Blue
 import com.example.aiwritingassitance.ui.theme.Grey
@@ -202,8 +196,8 @@ fun CreateAccountFields(
 
     DetailsFields(
         value = name,
-        label = "Name",
-        placeholder = "Enter your first name",
+        label = "UserName",
+        placeholder = "Enter your username",
         onValueChaged = onNameChanged
     )
 
@@ -211,7 +205,7 @@ fun CreateAccountFields(
 
     DetailsFields(
         value = password,
-        label = "Password",
+        label = "Password(atleast 8 characters)",
         placeholder = "Enter your last name",
         onValueChaged = onPasswordChanged
     )
@@ -221,7 +215,7 @@ fun CreateAccountFields(
 
     DetailsFields(modifier = modifier.fillMaxWidth(),
         value = confirmPassword,
-        label = "ConfirmPassword",
+        label = "ConfirmPassword(atleast 8 characters)",
         placeholder = "Enter Password",
         onValueChaged = onConfirmPasswordChanged,
         /*trailingIcon = {

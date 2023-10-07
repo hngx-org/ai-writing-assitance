@@ -17,6 +17,7 @@ class AuthService(context: Context) {
     var loginResponseId: String = ""
     var loginResponseEmail: String = ""
     var loginResponseUsername: String = ""
+    var loginResponseCookies: String = ""
     var loginResponseCredit: Int = -1
 
     val apiService = AuthLibrary.createAuthService()
@@ -29,9 +30,6 @@ class AuthService(context: Context) {
     val logoutRepository = AuthLibrary.createLogoutRepository(apiService)
 
     val profileRepository = AuthLibrary.createProfileRepository(apiService)
-
-
-
 
     suspend fun signUp(name : String, email : String, password : String) : Boolean {
         var result : ApiResponse<AuthResponse>
@@ -73,7 +71,8 @@ class AuthService(context: Context) {
                 userData = UserData(id = loginResponseId,
                     email = loginResponseEmail,
                     userName = loginResponseUsername,
-                    userCredit = loginResponseCredit)
+                   // userCookies = loginResponseCookies,
+                     userCredit = loginResponseCredit )
 
 
                 Log.d("ApiResponseResult", "error")
@@ -86,9 +85,11 @@ class AuthService(context: Context) {
                 loginResponseUsername = authResponse.data.name
                 loginResponseCredit = authResponse.data.credits
 
-                userData = UserData(id = loginResponseId,
+                userData = UserData(
+                    id = loginResponseId,
                     email = loginResponseEmail,
                     userName = loginResponseUsername,
+                    //userCookies = loginResponseCookies,
                     userCredit = loginResponseCredit)
 
 

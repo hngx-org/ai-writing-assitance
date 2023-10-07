@@ -43,10 +43,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun AccountScreen(context: BottomNavigationActivity, authService: AuthService) {
+fun AccountScreen(context: BottomNavigationActivity,
+                  authService: AuthService,
+                  userEmail: String,
+                  userName: String) {
     var darkMode by remember {
         mutableStateOf(false)
     }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,8 +66,8 @@ fun AccountScreen(context: BottomNavigationActivity, authService: AuthService) {
                 )
                 .padding(top = 8.dp)
         )
-        Text(text = "John Doe", style = MaterialTheme.typography.headlineMedium)
-        Text(text = "johndoe@gmail.com", style = MaterialTheme.typography.bodyLarge)
+        Text(text = "$userName", style = MaterialTheme.typography.headlineMedium)
+        Text(text = "$userEmail", style = MaterialTheme.typography.bodyLarge)
 
         LazyColumn(){
             item {
