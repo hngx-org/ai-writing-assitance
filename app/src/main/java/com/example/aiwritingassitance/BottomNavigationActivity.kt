@@ -61,15 +61,12 @@ class BottomNavigationActivity : ComponentActivity() {
 
 
             val intent = intent
-            var userId = intent.getStringExtra("UserId")
-            var userEmail = intent.getStringExtra("UserEmail")
-            var  userName = intent.getStringExtra("UserName")
-            var userCredit = intent.getStringExtra("UserCredit")
-            var userCookies = intent.getStringExtra("UserCookies")
+            var userId = intent.getStringExtra("UserId")?: "default_value"
+            var userEmail = intent.getStringExtra("UserEmail")?: "default_value"
+            var  userName = intent.getStringExtra("UserName")?: "default_value"
+            var userCredit = intent.getStringExtra("UserCredit")?: "default_value"
+            var userCookies = intent.getStringExtra("UserCookies")?: "default_value"
 
-            if (userCookies != null) {
-                Log.d("ApiResponseResult", userCookies)
-            }
 
 
 
@@ -113,13 +110,18 @@ class BottomNavigationActivity : ComponentActivity() {
                         composable(HomeDestination.route) {
                             HomeScreen(
                                 navController = navController,
+                                userName = userName!!,
+                                userCredit = userCredit!!,
                                 onNavigateToReward = {
                                     selectedItem = 1
                                 }
                             )
                         }
                         composable(ChatDestination.route) { ChatScreen(navController = navController) }
-                        composable(AccountDestination.route) { AccountScreen(authService = authService, context = this@BottomNavigationActivity)}
+                        composable(AccountDestination.route) { AccountScreen(authService = authService,
+                            context = this@BottomNavigationActivity,
+                            userEmail = userEmail,
+                            userName = userName)}
 
 
                         //richard
