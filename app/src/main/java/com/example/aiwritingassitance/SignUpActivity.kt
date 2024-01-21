@@ -50,7 +50,7 @@ class SignUpActivity : ComponentActivity() {
 
 
             AIWritingAssitanceTheme {
-                val authService = AuthService(applicationContext)
+                val authService = AuthService(MyApp.appContext)
 
                 /*val intent = intent
                 val isToken = intent.getBooleanExtra("EntryMessage", true)*/
