@@ -134,16 +134,13 @@ class LoginActivity : ComponentActivity() {
                         enabled = isDataValidated
                     ) {
 
-
                         Text(
                             text = "Login",
                             fontSize = 14.sp
                         )
                     }
 
-
                 }
-
             }
         }
 

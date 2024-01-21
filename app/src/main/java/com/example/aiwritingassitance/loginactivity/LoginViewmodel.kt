@@ -32,13 +32,49 @@ class LoginViewmodel(private val authService: AuthService) : ViewModel() {
 
     suspend fun loginIn(email: String, password: String) : UserData {
         lateinit var userData : UserData
-        val result : ApiResponse<AuthResponse>
+        var result : ApiResponse<AuthResponse>
         val loginRequest = LoginRequest(
             email = email,
             password = password
         )
+        viewModelScope.launch {  result = authService.loginRepository.login(loginRequest)
+            when(result) {
 
-        result = authService.loginRepository.login(loginRequest)
+                is ApiResponse.Error -> {
+                    val data = (result as ApiResponse.Error).message
+                    //loginResult = "0"
+                    userData = UserData(id = userId,
+                        email = userEmail,
+                        userName = userName,
+                        //userCookies = userCookies,
+                        userCredit = userCredit)
+
+
+                    Log.d("ApiResponseResult", "error")
+                }
+                is ApiResponse.Success -> {
+                    val authResponse  = (result as ApiResponse.Success<AuthResponse>).data
+                    //loginResult = authResponse.data.id
+                    userId = authResponse.data.id
+                    userEmail = authResponse.data.email
+                    userName = authResponse.data.name
+                    userCredit = authResponse.data.credits
+
+                    userData = UserData(id = userId,
+                        email = userEmail,
+                        userName = userName,
+                        //userCookies = userCookies,
+                        userCredit = userCredit)
+
+
+                    /*Log.d("ApiResponseResult", data.status.toString())
+                    Log.d("ApiResponseResult", data.message)*/
+                    Log.d("ApiResponseResult", authResponse.toString())
+                    Log.d("ApiResponseResult", authResponse.data.id)
+                }
+            }
+        }
+/*
         when(result) {
 
             is ApiResponse.Error -> {
@@ -68,12 +104,12 @@ class LoginViewmodel(private val authService: AuthService) : ViewModel() {
                     userCredit = userCredit)
 
 
-                /*Log.d("ApiResponseResult", data.status.toString())
-                Log.d("ApiResponseResult", data.message)*/
+                *//*Log.d("ApiResponseResult", data.status.toString())
+                Log.d("ApiResponseResult", data.message)*//*
                 Log.d("ApiResponseResult", authResponse.toString())
                 Log.d("ApiResponseResult", authResponse.data.id)
             }
-        }
+        }*/
         return userData
     }
 
@@ -99,20 +135,9 @@ class LoginViewmodel(private val authService: AuthService) : ViewModel() {
         }
         return cookies
     }
-
-
-
-
-
-
-
-
  /* lateinit var userEmail: MutableLiveData<String>
     lateinit var userName : MutableLiveData<String>
     lateinit var userId : MutableLiveData<String>
     lateinit var userCookies : MutableLiveData<String>
     */
-
-
-
 }
